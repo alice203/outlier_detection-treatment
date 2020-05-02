@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 from sklearn.datasets import load_boston
 import numpy as np
 import pandas as pd
@@ -13,10 +7,6 @@ import scipy as sp
 from scipy.stats import chi2
 from sklearn.covariance import MinCovDet
 
-
-# In[2]:
-
-
 #Load data
 boston = load_boston()
 X, y = load_boston(return_X_y=True)
@@ -25,27 +15,11 @@ X, y = load_boston(return_X_y=True)
 columns = boston.feature_names
 df = pd.DataFrame(X, columns = columns)
 
-
-# In[3]:
-
-
 df
-
-
-# In[4]:
-
 
 df.describe()
 
-
-# In[5]:
-
-
 ax = sns.boxplot(x=df["RM"])
-
-
-# In[6]:
-
 
 #Tukey's method
 def tukeys_method(variable):
@@ -71,10 +45,6 @@ print(probable_outliers_cr)
 probable_outliers_zn = tukeys_method(df["ZN"])
 print(probable_outliers_zn)
 
-
-# In[7]:
-
-
 #Internally studentized method (z-score)
 def z_score_method(df, variable_name):
     columns = df.columns
@@ -94,10 +64,6 @@ def z_score_method(df, variable_name):
 
 outlier_z = z_score_method(df, 'ZN')
 print(outlier_z)
-
-
-# In[8]:
-
 
 #MAD method
 def mad_method(df, variable_name):
