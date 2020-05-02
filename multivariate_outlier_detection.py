@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[158]:
-
-
 from sklearn.datasets import load_boston
 import copy 
 import numpy as np
@@ -14,10 +8,6 @@ import scipy as sp
 from scipy.stats import chi2
 from sklearn.covariance import MinCovDet
 
-
-# In[137]:
-
-
 #Load data
 boston = load_boston()
 X, y = load_boston(return_X_y=True)
@@ -26,28 +16,11 @@ X, y = load_boston(return_X_y=True)
 columns = boston.feature_names
 df = pd.DataFrame(X, columns = columns)
 
-
-# In[138]:
-
-
-df
-
-
-# In[139]:
-
-
+#df
 df.describe()
-
-
-# In[140]:
-
 
 #Scatterplot
 ax = sns.scatterplot(x="RM", y="INDUS", data=df)
-
-
-# In[141]:
-
 
 #Mahalonibis Distance
 def mahalanobis_method(x=None, data=None):
@@ -71,10 +44,6 @@ outliers_mahal, md = mahalanobis_method(x=df, data=df)
 print(len(outliers_mahal))
 print(outliers_mahal)
 df['md'] = md
-
-
-# In[154]:
-
 
 #Robust Mahalonibis Distance
 def robust_mahalanobis_method(x=None, data=None):
@@ -108,10 +77,6 @@ print(len(outliers_mahal_rob))
 print(outliers_mahal_rob)
 df['md_rob'] = md_rb
 
-
-# In[166]:
-
-
 #Visualization
 bivariate_df = df[['RM', 'INDUS']]
 bv_outliers_mahal,md = mahalanobis_method(x=bivariate_df, data=bivariate_df)
@@ -133,34 +98,16 @@ bv_df['md'] = md
 bv_df['flag_rob'] = flag_outliers(bivariate_df,bv_outliers_mahal_rob )
 bv_df['md_robust'] = md_robust
 
-
-# In[108]:
-
-
 ax = sns.scatterplot(x="RM", y="INDUS", hue='flag', data=df)
-
-
-# In[112]:
-
 
 ax = sns.scatterplot(x="RM", y="INDUS", hue='flag_rob', data=df)
 
-
-# In[167]:
-
-
 i = np.arange(0,df.shape[0],1) 
 bv_df['index'] = i
+
 ax = sns.scatterplot(x="index", y="md", data=bv_df, hue ='flag')
 
-
-# In[170]:
-
-
 ax = sns.scatterplot(x="index", y="md_robust", data=bv_df, hue ='flag_rob')
-
-
-# In[182]:
 
 
 get_ipython().run_line_magic('matplotlib', 'inline')
@@ -174,10 +121,6 @@ fig1.add_shape(dict(type="line", x0=0, y0=15, x1=500, y1=15, line_dash="dot",
                    line=dict(color="orange", width=3)))
 fig1.update_layout(xaxis_title="index", yaxis_title="Mahalanobis distance")
 fig1
-
-
-# In[183]:
-
 
 
 fig2 = px.scatter(bv_df, x='index', y='md_robust', color='flag_rob')
