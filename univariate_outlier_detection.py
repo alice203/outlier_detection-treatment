@@ -3,9 +3,6 @@ import numpy as np
 import pandas as pd
 import seaborn as sns
 from scipy import stats
-import scipy as sp
-from scipy.stats import chi2
-from sklearn.covariance import MinCovDet
 
 #Load data
 boston = load_boston()
