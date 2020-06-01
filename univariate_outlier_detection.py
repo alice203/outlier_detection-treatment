@@ -20,8 +20,8 @@ ax = sns.boxplot(x=df["RM"])
 
 #Tukey's method
 def tukeys_method(variable):
-    q1 = df["CRIM"].quantile(0.25)
-    q3 = df["CRIM"].quantile(0.75)
+    q1 = variable.quantile(0.25)
+    q3 = variable.quantile(0.75)
     iqr = q3-q1
     inner_fence = 1.5*iqr
     outer_fence = 3*iqr
