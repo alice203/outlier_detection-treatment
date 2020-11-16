@@ -5,10 +5,10 @@ import seaborn as sns
 from scipy import stats
 
 #Load data
-boston = load_boston()
 X, y = load_boston(return_X_y=True)
 
 #Create data frame
+boston = load_boston()
 columns = boston.feature_names
 df = pd.DataFrame(X, columns = columns)
 
